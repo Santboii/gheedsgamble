@@ -584,3 +584,198 @@
 .deleteButton:hover {
   background: rgba(139, 69, 19, 0.5);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem 1rem 6rem 1rem;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .titleFixed {
+    font-size: 1.2rem;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .configContainer {
+    padding: 1.5rem;
+    min-width: unset;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 5rem;
+  }
+
+  .configGroup {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .configGroup label {
+    font-size: 0.9rem;
+  }
+
+  .configGroup input,
+  .configGroup select {
+    width: 100%;
+  }
+
+  .startButton,
+  .historyButton {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .progressPanel {
+    top: 3.5rem;
+    right: 0.5rem;
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    max-width: 150px;
+  }
+
+  .stepContainer {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 5rem;
+  }
+
+  .stepContainer h2 {
+    font-size: 1.2rem;
+  }
+
+  .pendingResult h3 {
+    font-size: 1.3rem;
+  }
+
+  .resultValue {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+
+  .confirmButton,
+  .rerollButton,
+  .startRunButton {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .resultCard {
+    padding: 1.5rem;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .resultTitle {
+    font-size: 1.5rem;
+  }
+
+  .resultDetails p {
+    font-size: 0.9rem;
+  }
+
+  .summaryDescription {
+    font-size: 0.85rem;
+  }
+
+  /* Modal adjustments */
+  .modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.3rem;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exportButton,
+  .importButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .runItem {
+    padding: 0.8rem;
+  }
+
+  .runHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .runActions {
+    flex-wrap: wrap;
+  }
+
+  .runActions button {
+    flex: 1;
+    min-width: 80px;
+  }
+
+  /* Flame effects - reduce on mobile */
+  .fireOverlay,
+  .fireOverlayBack {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .titleFixed {
+    font-size: 1rem;
+  }
+
+  .configContainer {
+    padding: 1rem;
+  }
+
+  .progressPanel {
+    font-size: 0.75rem;
+    padding: 0.6rem;
+  }
+
+  .stepContainer h2 {
+    font-size: 1rem;
+  }
+
+  .resultValue {
+    font-size: 1.5rem;
+  }
+
+  .resultTitle {
+    font-size: 1.2rem;
+  }
+
+  /* Smaller flames on very small screens */
+  .fireOverlay,
+  .fireOverlayBack {
+    height: 80px;
+  }
+}
