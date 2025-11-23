@@ -1,141 +1,586 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
 .main {
-  display: flex;
   min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
-}
-
-.intro {
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1.5rem 8rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.backgroundLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Add an overlay to ensure text is readable */
+.main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  /* Darken the background */
+  z-index: 0;
+}
+
+/* Ensure content is above overlay */
+.main>* {
+  z-index: 10;
+}
+
+.description {
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.summaryDescription {
+  color: #aaa;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  color: #FF4500;
+  text-shadow:
+    0 0 10px #FFD700,
+    0 0 20px #8B0000,
+    0 0 30px #000;
+  text-align: center;
+  z-index: 10;
+  font-weight: 900;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.titleFixed {
+  position: fixed;
+  top: 1rem;
+  left: 1.5rem;
+  font-size: 2rem;
+  z-index: 100;
+}
+
+.configContainer {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border: 2px solid var(--diablo-gold);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 300px;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  margin-bottom: 10rem;
+}
+
+.configGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.configGroup input,
+.configGroup select {
+  background: var(--diablo-black);
+  color: var(--diablo-gold);
+  border: 1px solid var(--diablo-gold);
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.startButton {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.stepContainer {
+  text-align: center;
+  animation: fadeIn 0.5s ease-in;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 10rem;
+}
+
+.pendingResult {
+  margin-top: 2rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid var(--diablo-gold);
+  padding: 2rem;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-out;
+  box-shadow: 0 0 30px var(--diablo-red);
+}
+
+.resultValue {
+  font-size: 2rem;
+  color: white;
+  margin: 1rem 0;
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--diablo-red);
+}
+
+.confirmButton {
+  background: var(--diablo-red);
+  color: white;
+  border-color: var(--diablo-red);
+}
+
+.rerollButton {
+  background: var(--diablo-grey);
+}
+
+.resultCard {
+  border: 2px solid var(--diablo-gold);
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.9);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(136, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.resultTitle {
+  color: var(--diablo-gold);
+  border-bottom: 1px solid var(--diablo-red);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.resultDetails {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.resultDetails span {
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.resultDetails ul {
+  list-style-type: square;
+  color: var(--diablo-red);
+  margin-top: 0.5rem;
+}
+
+.resultDetails li {
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.progressPanel {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--diablo-gold);
+  padding: 1rem;
+  min-width: 200px;
+  z-index: 100;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.selections {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.challengeItem {
+  color: var(--diablo-red);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fireOverlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  /* Increased from 200px */
+  background-image: url('/fire_strip.png');
+  background-size: auto 100%;
+  /* Keep height, repeat width */
+  background-repeat: repeat-x;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  animation: flickerPan 20s infinite linear;
+  /* Slower, continuous panning */
+}
+
+@keyframes flickerPan {
+  0% {
+    background-position: 0 0;
+    transform: translateY(0) scaleY(1);
+    filter: brightness(1);
+  }
+
+  25% {
+    transform: translateY(-8px) scaleY(1.3);
+    filter: brightness(1.2);
+  }
+
+  50% {
+    transform: translateY(-3px) scaleY(0.85);
+    filter: brightness(1);
+  }
+
+  75% {
+    transform: translateY(-10px) scaleY(1.35);
+    filter: brightness(1.2);
+  }
+
+  100% {
+    background-position: 100% 0;
+    transform: translateY(0) scaleY(1);
+    filter: brightness(1);
+  }
+}
+
+.fireOverlayBack {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  /* Smaller than front layer */
+  background-image: url('/fire_strip.png');
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  z-index: 19;
+  /* Behind the main fire */
+  pointer-events: none;
+  opacity: 0.5;
+  /* More subtle */
+  mix-blend-mode: screen;
+  animation: flickerPanReverse 25s infinite linear;
+  /* Slower, opposite direction */
+}
+
+@keyframes flickerPanReverse {
+  0% {
+    background-position: 100% 0;
+    transform: translateY(-5px) scaleY(1.1);
+    filter: brightness(0.9);
+  }
+
+  25% {
+    transform: translateY(-8px) scaleY(1.28);
+    filter: brightness(1.1);
+  }
+
+  50% {
+    transform: translateY(-2px) scaleY(0.88);
+    filter: brightness(0.9);
+  }
+
+  75% {
+    transform: translateY(-6px) scaleY(1.22);
+    filter: brightness(1.1);
+  }
+
+  100% {
+    background-position: 0 0;
+    transform: translateY(-5px) scaleY(1.1);
+    filter: brightness(0.9);
+  }
+}
+
+/* Run Tracking Styles */
+.historyButton {
+  margin-top: 1rem;
+  background: rgba(139, 69, 19, 0.8);
+  border: 2px solid var(--diablo-gold);
+  color: var(--diablo-gold);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  transition: all 0.3s;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.historyButton:hover {
+  background: rgba(139, 69, 19, 1);
+  transform: scale(1.05);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.startRunButton {
+  background: linear-gradient(135deg, #8B4513, #654321);
+  border: 2px solid var(--diablo-gold);
+  color: var(--diablo-gold);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-right: 1rem;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.startRunButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(199, 179, 119, 0.5);
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+.runStatus {
+  color: #4CAF50;
+  font-size: 1.1rem;
+  padding: 1rem;
+  font-weight: bold;
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+.modal {
+  background: linear-gradient(135deg, #1a0000, #2a0000);
+  border: 3px solid var(--diablo-gold);
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--diablo-gold);
+}
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+.modalHeader h2 {
+  margin: 0;
+  color: var(--diablo-gold);
+  font-size: 1.8rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--diablo-gold);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  color: #fff;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(199, 179, 119, 0.3);
+}
+
+.exportButton,
+.importButton {
+  background: rgba(139, 69, 19, 0.8);
+  border: 2px solid var(--diablo-gold);
+  color: var(--diablo-gold);
+  padding: 0.6rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.exportButton:hover,
+.importButton:hover {
+  background: rgba(139, 69, 19, 1);
+}
+
+.runList {
+  overflow-y: auto;
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.emptyState {
+  text-align: center;
+  color: #999;
+  padding: 3rem;
+  font-style: italic;
+}
+
+.runItem {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(199, 179, 119, 0.3);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+
+.runItem:hover {
+  border-color: var(--diablo-gold);
+  transform: translateX(5px);
+}
+
+.runHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.statusBadge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.statusBadge.active {
+  background: #FFA500;
+  color: #000;
+}
+
+.statusBadge.completed {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.statusBadge.failed {
+  background: #f44336;
+  color: #fff;
+}
+
+.runDate {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.runDetails {
+  margin: 0.5rem 0;
+  color: #ccc;
+}
+
+.runDetails p {
+  margin: 0.3rem 0;
+}
+
+.challengesList {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+}
+
+.runActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.completeButton,
+.failButton,
+.deleteButton {
+  padding: 0.4rem 1rem;
+  border: 1px solid;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.completeButton {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+
+.completeButton:hover {
+  background: rgba(76, 175, 80, 0.4);
+}
+
+.failButton {
+  background: rgba(244, 67, 54, 0.2);
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.failButton:hover {
+  background: rgba(244, 67, 54, 0.4);
+}
+
+.deleteButton {
+  background: rgba(139, 69, 19, 0.3);
+  border-color: #8B4513;
+  color: #C7B377;
+}
+
+.deleteButton:hover {
+  background: rgba(139, 69, 19, 0.5);
 }
