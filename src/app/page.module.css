@@ -110,6 +110,7 @@
   padding: 0.5rem;
   font-family: inherit;
   font-size: 1rem;
+  max-width: 150px;
 }
 
 .startButton {
@@ -449,18 +450,36 @@
 
 .exportButton,
 .importButton {
-  background: rgba(139, 69, 19, 0.8);
   border: 2px solid var(--diablo-gold);
   color: var(--diablo-gold);
   padding: 0.6rem 1.5rem;
   cursor: pointer;
   transition: all 0.3s;
   font-size: 0.9rem;
+  display: inline-block;
+  text-align: center;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.exportButton:hover,
-.importButton:hover {
+.exportButton {
+  background: rgba(139, 69, 19, 0.8);
+}
+
+.importButton {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: rgba(199, 179, 119, 0.6);
+  color: rgba(199, 179, 119, 0.9);
+}
+
+.exportButton:hover {
   background: rgba(139, 69, 19, 1);
+}
+
+.importButton:hover {
+  background: rgba(60, 60, 60, 0.9);
+  border-color: var(--diablo-gold);
+  color: var(--diablo-gold);
 }
 
 .runList {
@@ -588,32 +607,43 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .main {
-    padding: 1rem 1rem 6rem 1rem;
-    gap: 1rem;
+    padding: 1rem;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    padding-top: 10rem;
   }
 
   .title {
     font-size: 2rem;
     letter-spacing: 1px;
+    margin-bottom: 1rem;
   }
 
   .titleFixed {
     font-size: 1.2rem;
     top: 0.5rem;
-    left: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
   }
 
   .configContainer {
     padding: 1.5rem;
     min-width: unset;
-    width: 100%;
+    width: calc(100% - 2rem);
     max-width: 400px;
-    margin-bottom: 5rem;
+    margin: 0 auto 3rem;
+  }
+
+  .configContainer h2 {
+    font-size: 1.3rem;
   }
 
   .configGroup {
     flex-direction: column;
     gap: 0.5rem;
+    align-items: stretch;
   }
 
   .configGroup label {
@@ -623,48 +653,60 @@
   .configGroup input,
   .configGroup select {
     width: 100%;
+    box-sizing: border-box;
   }
 
   .startButton,
   .historyButton {
     font-size: 1rem;
     padding: 0.8rem 1.5rem;
+    width: 100%;
   }
 
   .progressPanel {
-    top: 3.5rem;
+    top: 3rem;
     right: 0.5rem;
+    left: 0.5rem;
     padding: 0.8rem;
     font-size: 0.85rem;
-    max-width: 150px;
+    max-width: none;
+    min-width: unset;
   }
 
   .stepContainer {
-    width: 100%;
+    width: calc(100% - 2rem);
     max-width: 400px;
-    margin-bottom: 5rem;
+    margin: 0 auto 3rem;
   }
 
   .stepContainer h2 {
     font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pendingResult {
+    padding: 1.5rem;
   }
 
   .pendingResult h3 {
     font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
 
   .resultValue {
     font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
 
   .description {
     font-size: 0.9rem;
     max-width: 100%;
+    margin-bottom: 1.5rem;
   }
 
   .actions {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
   }
 
   .actions button {
@@ -681,15 +723,22 @@
   .resultCard {
     padding: 1.5rem;
     max-width: 400px;
-    width: 100%;
+    width: calc(100% - 2rem);
+    margin: 0 auto;
   }
 
   .resultTitle {
     font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .resultDetails p {
     font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .resultDetails ul {
+    margin-left: 1rem;
   }
 
   .summaryDescription {
@@ -700,6 +749,11 @@
   .modal {
     width: 95%;
     max-height: 90vh;
+    margin: 0 auto;
+  }
+
+  .modalHeader {
+    padding: 1rem;
   }
 
   .modalHeader h2 {
@@ -709,6 +763,7 @@
   .modalActions {
     flex-direction: column;
     gap: 0.5rem;
+    padding: 1rem;
   }
 
   .exportButton,
@@ -717,8 +772,13 @@
     text-align: center;
   }
 
+  .runList {
+    padding: 1rem;
+  }
+
   .runItem {
-    padding: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
 
   .runHeader {
@@ -729,6 +789,7 @@
 
   .runActions {
     flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .runActions button {
@@ -744,6 +805,11 @@
 }
 
 @media (max-width: 480px) {
+  .main {
+    padding: 0.75rem;
+    padding-top: 9rem;
+  }
+
   .title {
     font-size: 1.5rem;
   }
@@ -754,15 +820,30 @@
 
   .configContainer {
     padding: 1rem;
+    width: calc(100% - 1.5rem);
+  }
+
+  .configContainer h2 {
+    font-size: 1.1rem;
   }
 
   .progressPanel {
     font-size: 0.75rem;
     padding: 0.6rem;
+    top: 2.5rem;
+    min-width: unset;
+  }
+
+  .stepContainer {
+    width: calc(100% - 1.5rem);
   }
 
   .stepContainer h2 {
     font-size: 1rem;
+  }
+
+  .pendingResult {
+    padding: 1rem;
   }
 
   .resultValue {
@@ -771,6 +852,10 @@
 
   .resultTitle {
     font-size: 1.2rem;
+  }
+
+  .resultCard {
+    width: calc(100% - 1.5rem);
   }
 
   /* Smaller flames on very small screens */
