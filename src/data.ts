@@ -18,7 +18,7 @@ export const CLASSES: ClassName[] = [
 
 export const BUILDS: Record<ClassName, Build[]> = {
     Amazon: [
-        { name: "Javaazon", description: "Max: Lightning Fury, Charged Strike, Lightning Bolt, Power Strike" },
+        { name: "Javazon", description: "Max: Lightning Fury, Charged Strike, Lightning Bolt, Power Strike" },
         { name: "Bowazon (Physical)", description: "Max: Strafe, Multiple Shot, Guided Arrow, Valkyrie" },
         { name: "Frost Maiden", description: "Max: Freezing Arrow, Cold Arrow, Valkyrie" },
         { name: "Fendazon", description: "Max: Fend, Jab, Critical Strike, Penetrate" },
@@ -59,7 +59,9 @@ export const BUILDS: Record<ClassName, Build[]> = {
         { name: "Smiter", description: "Max: Smite, Holy Shield, Fanaticism, Defiance" },
         { name: "FoHdin", description: "Max: Fist of the Heavens, Holy Bolt, Holy Shock" },
         { name: "Auradin (Holy Fire)", description: "Max: Resist Fire, Salvation (Aura from gear)" },
-        { name: "Dragondin", description: "Max: Resist Fire, Salvation (Holy Fire from gear)" }
+        { name: "Dragondin", description: "Max: Resist Fire, Salvation (Holy Fire from gear)" },
+        { name: "Bow Paladin", description: "Max: Holy Fire, Resist Fire, Bow skills (from gear)" },
+        { name: "Mind Control Paladin", description: "Max: Conversion, Fanaticism, Zeal, Holy Shield" }
     ],
     Sorceress: [
         { name: "Blizzard", description: "Max: Blizzard, Ice Blast, Glacial Spike, Cold Mastery" },
@@ -69,7 +71,8 @@ export const BUILDS: Record<ClassName, Build[]> = {
         { name: "Enchantress", description: "Max: Enchant, Warmth, Fire Mastery" },
         { name: "Bear Sorc", description: "Max: Enchant, Warmth, Lightning Mastery (Dreams)" },
         { name: "Nova Sorc", description: "Max: Nova, Lightning Mastery, Charged Bolt, Static Field" },
-        { name: "Hydra", description: "Max: Hydra, Fire Mastery, Fire Ball, Warmth" }
+        { name: "Hydra", description: "Max: Hydra, Fire Mastery, Fire Ball, Warmth" },
+        { name: "Flame Zealot", description: "Max: Enchant, Zeal (from gear), Fire Mastery, Warmth" }
     ],
     Druid: [
         { name: "Wind Druid", description: "Max: Tornado, Hurricane, Cyclone Armor, Twister" },
@@ -77,7 +80,8 @@ export const BUILDS: Record<ClassName, Build[]> = {
         { name: "Fire Druid", description: "Max: Fissure, Volcano, Armageddon, Molten Boulder" },
         { name: "Summoner Druid", description: "Max: Summon Grizzly, Summon Dire Wolf, Heart of Wolverine" },
         { name: "Maul Werebear", description: "Max: Maul, Shockwave, Lycanthropy, Werebear" },
-        { name: "Rabies", description: "Max: Rabies, Poison Creeper, Lycanthropy" }
+        { name: "Rabies", description: "Max: Rabies, Poison Creeper, Lycanthropy" },
+        { name: "Arctic Blast", description: "Max: Arctic Blast, Cyclone Armor, Hurricane, Cold Mastery" }
     ]
 };
 
