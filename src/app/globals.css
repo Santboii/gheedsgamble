@@ -1,31 +1,11 @@
-/* Diablo-style fonts - Exocet and Optimus Princeps */
-/* Note: Add font files to public/fonts/ directory for custom fonts */
-@font-face {
-  font-family: 'Exocet';
-  src: url('/fonts/exocet.woff2') format('woff2'),
-    url('/fonts/exocet.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Optimus Princeps';
-  src: url('/fonts/optimus-princeps.woff2') format('woff2'),
-    url('/fonts/optimus-princeps.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 :root {
   --diablo-gold: #C7B377;
   --diablo-red: #880000;
   --diablo-black: #0F0F0F;
   --diablo-grey: #1a1a1a;
-  /* Font stack: Exocet for headings, Optimus Princeps for body, with fallbacks */
-  --font-heading: 'Exocet', 'Optimus Princeps', 'Cinzel', serif;
-  --font-main: 'Optimus Princeps', 'Exocet', 'Cinzel', serif;
+  --font-main: 'Cinzel', serif;
 }
 
 html {
@@ -88,7 +68,6 @@ h1,
 h2 {
   position: relative;
   display: inline-block;
-  font-family: var(--font-heading);
   /* Ensure width fits content for effect */
 }
 
