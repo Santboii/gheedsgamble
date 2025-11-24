@@ -155,36 +155,28 @@
   margin-top: 1rem;
   font-size: 1.3rem;
   width: 100%;
-  background: linear-gradient(to bottom, #cc5500, #8b2500);
+  background: linear-gradient(to bottom, #8b4513, #5a2d0c);
   border: 2px solid #c7b377;
-  color: #fff;
+  color: #c7b377;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-  font-weight: 700;
-  box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
-  animation: pulseButton 3s infinite;
+  font-weight: 400;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .startButton:hover {
-  background: linear-gradient(to bottom, #e66000, #a32b00);
-  box-shadow: 0 0 15px rgba(204, 85, 0, 0.6);
+  background: linear-gradient(to bottom, #a0522d, #6b3611);
+  box-shadow: 0 0 15px rgba(199, 179, 119, 0.3);
   transform: scale(1.01);
   border-color: #ffd700;
+  color: #ffd700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 @keyframes pulseButton {
-  0% {
-    box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
-  }
-
-  50% {
-    box-shadow: 0 0 15px rgba(204, 85, 0, 0.5);
-  }
-
-  100% {
-    box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
-  }
+  /* Animation removed for subtlety */
 }
 
 .stepContainer {
