@@ -28,11 +28,11 @@ const Wheel: React.FC<WheelProps> = ({ items, winningIndex, onSpinComplete }) =>
         return text.substring(0, maxLength) + '...';
     };
 
-    // Convert items to the format expected by react-custom-roulette
-    const data = items.map((item) => ({
+    // Convert items to the format expected by react-custom-roulette with alternating colors
+    const data = items.map((item, index) => ({
         option: truncateText(item),
         style: {
-            backgroundColor: '#8B0000',
+            backgroundColor: index % 2 === 0 ? '#8B0000' : '#6B0000',
             textColor: '#FFFFFF'
         }
     }));

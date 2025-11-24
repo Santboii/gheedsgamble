@@ -384,9 +384,9 @@
 /* Run Tracking Styles */
 .historyButton {
   margin-top: 1rem;
-  background: rgba(139, 69, 19, 0.8);
-  border: 2px solid var(--diablo-gold);
-  color: var(--diablo-gold);
+  background: transparent;
+  border: 2px solid rgba(199, 179, 119, 0.5);
+  color: rgba(199, 179, 119, 0.8);
   padding: 0.8rem 2rem;
   font-size: 1rem;
   cursor: pointer;
@@ -394,8 +394,10 @@
 }
 
 .historyButton:hover {
-  background: rgba(139, 69, 19, 1);
-  transform: scale(1.05);
+  background: rgba(199, 179, 119, 0.1);
+  border-color: var(--diablo-gold);
+  color: var(--diablo-gold);
+  transform: scale(1.02);
 }
 
 .startRunButton {
