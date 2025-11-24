@@ -95,6 +95,34 @@
   margin-bottom: 10rem;
 }
 
+.configHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gheedIcon {
+  width: 80px;
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px rgba(199, 179, 119, 0.5));
+  animation: gheedFloat 3s ease-in-out infinite;
+}
+
+@keyframes gheedFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 .configGroup {
   display: flex;
   justify-content: space-between;
@@ -640,6 +668,14 @@
     font-size: 1.3rem;
   }
 
+  .gheedIcon {
+    width: 60px;
+  }
+
+  .configHeader {
+    gap: 1rem;
+  }
+
   .configGroup {
     flex-direction: column;
     gap: 0.5rem;
@@ -825,6 +861,10 @@
 
   .configContainer h2 {
     font-size: 1.1rem;
+  }
+
+  .gheedIcon {
+    width: 50px;
   }
 
   .progressPanel {
