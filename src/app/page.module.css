@@ -155,35 +155,35 @@
   margin-top: 1rem;
   font-size: 1.3rem;
   width: 100%;
-  background: linear-gradient(to bottom, #ff4500, #8b0000);
-  border: 2px solid #ffd700;
+  background: linear-gradient(to bottom, #cc5500, #8b2500);
+  border: 2px solid #c7b377;
   color: #fff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 700;
-  box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
-  animation: pulseButton 2s infinite;
+  box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
+  animation: pulseButton 3s infinite;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .startButton:hover {
-  background: linear-gradient(to bottom, #ff6347, #a50000);
-  box-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
-  transform: scale(1.02);
-  border-color: #fff;
+  background: linear-gradient(to bottom, #e66000, #a32b00);
+  box-shadow: 0 0 15px rgba(204, 85, 0, 0.6);
+  transform: scale(1.01);
+  border-color: #ffd700;
 }
 
 @keyframes pulseButton {
   0% {
-    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+    box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
   }
 
   50% {
-    box-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
+    box-shadow: 0 0 15px rgba(204, 85, 0, 0.5);
   }
 
   100% {
-    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+    box-shadow: 0 0 10px rgba(204, 85, 0, 0.3);
   }
 }
 
