@@ -1,9 +1,9 @@
 .wheelContainer {
     position: relative;
-    width: 450px;
-    /* Increased from 350px */
-    height: 450px;
-    /* Increased from 350px */
+    width: 550px;
+    /* Increased from 450px for better challenge readability */
+    height: 550px;
+    /* Increased from 450px for better challenge readability */
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
@@ -153,8 +153,8 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .wheelContainer {
-        width: 320px;
-        height: 320px;
+        width: 380px;
+        height: 380px;
         margin: 1.5rem auto;
     }
 
@@ -177,8 +177,8 @@
 
 @media (max-width: 480px) {
     .wheelContainer {
-        width: 280px;
-        height: 280px;
+        width: 320px;
+        height: 320px;
         margin: 1rem auto;
     }
 
