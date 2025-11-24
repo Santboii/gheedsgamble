@@ -214,7 +214,7 @@ export default function Home() {
 
       {step === "CONFIG" && (
         <section className={styles.configContainer} aria-labelledby="config-heading">
-          <h2 id="config-heading">CONFIGURE YOUR RUN</h2>
+          <h2 id="config-heading">MAKE YOUR WAGER</h2>
           <div className={styles.configGroup}>
             <label htmlFor="rerolls-input">Rerolls Allowed:</label>
             <input
