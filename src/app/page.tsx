@@ -213,23 +213,29 @@ export default function Home() {
       )}
 
       {step === "CONFIG" && (
-        <div className={styles.configContainer}>
-          <h2>CONFIGURE YOUR RUN</h2>
+        <section className={styles.configContainer} aria-labelledby="config-heading">
+          <h2 id="config-heading">CONFIGURE YOUR RUN</h2>
           <div className={styles.configGroup}>
-            <label>Rerolls Allowed:</label>
+            <label htmlFor="rerolls-input">Rerolls Allowed:</label>
             <input
+              id="rerolls-input"
               type="number"
               min="0"
               max="10"
               value={config.rerolls}
               onChange={(e) => setConfig({ ...config, rerolls: parseInt(e.target.value) || 0 })}
+              aria-label="Number of rerolls allowed"
+              aria-describedby="rerolls-desc"
             />
+            <span id="rerolls-desc" className="sr-only">Set the number of times you can reroll your fate</span>
           </div>
           <div className={styles.configGroup}>
-            <label>Challenges:</label>
+            <label htmlFor="challenges-select">Challenges:</label>
             <select
+              id="challenges-select"
               value={config.challengeCount}
               onChange={(e) => setConfig({ ...config, challengeCount: parseInt(e.target.value) })}
+              aria-label="Number of challenge modifiers"
             >
               <option value={0}>None (Coward)</option>
               <option value={1}>1 (Cautious)</option>
@@ -239,13 +245,21 @@ export default function Home() {
               <option value={5}>5 (Death Wish)</option>
             </select>
           </div>
-          <button onClick={startFlow} className={styles.startButton}>
+          <button
+            onClick={startFlow}
+            className={styles.startButton}
+            aria-label="Start the randomizer and enter the darkness"
+          >
             ENTER THE DARKNESS
           </button>
-          <button onClick={() => setShowHistory(true)} className={styles.historyButton}>
+          <button
+            onClick={() => setShowHistory(true)}
+            className={styles.historyButton}
+            aria-label="View your run history"
+          >
             VIEW RUN HISTORY
           </button>
-        </div>
+        </section>
       )}
 
       {/* Steps with Wheel */}
@@ -290,13 +304,19 @@ export default function Home() {
               )}
 
               <div className={styles.actions}>
-                <button onClick={confirmSelection} className={styles.confirmButton}>
+                <button
+                  onClick={confirmSelection}
+                  className={styles.confirmButton}
+                  aria-label="Accept the selected fate and continue"
+                >
                   ACCEPT FATE
                 </button>
                 <button
                   onClick={useReroll}
                   disabled={rerollsLeft === 0}
                   className={styles.rerollButton}
+                  aria-label={`Reroll your fate, ${rerollsLeft} rerolls remaining`}
+                  aria-disabled={rerollsLeft === 0}
                 >
                   DEFY FATE (Reroll: {rerollsLeft})
                 </button>
@@ -330,15 +350,22 @@ export default function Home() {
           </div>
           <div className={styles.actions}>
             {!currentRunId ? (
-              <button onClick={handleStartRun} className={styles.startRunButton}>
+              <button
+                onClick={handleStartRun}
+                className={styles.startRunButton}
+                aria-label="Start tracking this run in your history"
+              >
                 START RUN
               </button>
             ) : (
-              <div className={styles.runStatus}>
+              <div className={styles.runStatus} role="status" aria-live="polite">
                 ✓ Run Started - Track in History
               </div>
             )}
-            <button onClick={reset}>
+            <button
+              onClick={reset}
+              aria-label="Reset and create a new randomized run"
+            >
               NEW RUN
             </button>
           </div>
@@ -347,19 +374,41 @@ export default function Home() {
 
       {/* History Modal */}
       {showHistory && (
-        <div className={styles.modalOverlay} onClick={() => setShowHistory(false)}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowHistory(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="history-modal-title"
+        >
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2>RUN HISTORY</h2>
-              <button onClick={() => setShowHistory(false)} className={styles.closeButton}>×</button>
+              <h2 id="history-modal-title">RUN HISTORY</h2>
+              <button
+                onClick={() => setShowHistory(false)}
+                className={styles.closeButton}
+                aria-label="Close run history modal"
+              >
+                ×
+              </button>
             </div>
             <div className={styles.modalActions}>
-              <button onClick={exportRuns} className={styles.exportButton}>
+              <button
+                onClick={exportRuns}
+                className={styles.exportButton}
+                aria-label="Export your run history as a JSON file"
+              >
                 EXPORT
               </button>
               <label className={styles.importButton}>
                 IMPORT
-                <input type="file" accept=".json" onChange={handleImport} style={{ display: 'none' }} />
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={handleImport}
+                  style={{ display: 'none' }}
+                  aria-label="Import run history from a JSON file"
+                />
               </label>
             </div>
             <div className={styles.runList}>

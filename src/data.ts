@@ -100,5 +100,16 @@ export const CHALLENGES: Challenge[] = [
     { id: "c17", text: "No Waypoints", description: "Must walk everywhere (town portals allowed)", weight: 25 },
     { id: "c18", text: "No Town Portal", description: "Can only use waypoints to travel", weight: 35 },
     { id: "c19", text: "No Charms", description: "Inventory only for items, no charms allowed", weight: 55 },
-    { id: "c20", text: "No Crafting", description: "Cannot use Horadric Cube for crafting", weight: 50 }
+    { id: "c20", text: "No Crafting", description: "Cannot use Horadric Cube for crafting", weight: 50 },
+    { id: "c21", text: "First Skill Tree Banned", description: "Cannot use any skills from the first skill tree", weight: 45 },
+    { id: "c22", text: "Second Skill Tree Banned", description: "Cannot use any skills from the second skill tree", weight: 45 },
+    { id: "c23", text: "Third Skill Tree Banned", description: "Cannot use any skills from the third skill tree", weight: 45 },
+    { id: "c24", text: "Drop on Level", description: "Must drop one equipped item every time you level up", weight: 25 },
+    { id: "c25", text: "No Repairing Gear", description: "Cannot repair equipment, must replace when broken", weight: 35 },
+    { id: "c26", text: "No Trading with Vendors", description: "Cannot buy or sell items to NPCs", weight: 40 },
+    { id: "c27", text: "No Rejuvenation Potions", description: "Cannot use rejuvenation potions", weight: 60 },
+    { id: "c28", text: "No Mana Potions", description: "Cannot use mana potions, natural regen only", weight: 50 },
+    { id: "c29", text: "Same Song on Repeat", description: "Must listen to the same song on loop while playing", weight: 8 },
+    { id: "c30", text: "Ethereals Only", description: "Can only equip ethereal items (cannot be repaired)", weight: 20 },
 ];
+
