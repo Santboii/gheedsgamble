@@ -111,5 +111,8 @@ export const CHALLENGES: Challenge[] = [
     { id: "c28", text: "No Mana Potions", description: "Cannot use mana potions, natural regen only", weight: 50 },
     { id: "c29", text: "Same Song on Repeat", description: "Must listen to the same song on loop while playing", weight: 8 },
     { id: "c30", text: "Ethereals Only", description: "Can only equip ethereal items (cannot be repaired)", weight: 20 },
+    { id: "c31", text: "No Shields", description: "Cannot equip shields or off-hand items", weight: 55 },
+    { id: "c32", text: "Bow Only", description: "Can only use bows as weapons (no melee, no crossbows)", weight: 30 },
+    { id: "c33", text: "Shirtless Wonder", description: "Cannot equip chest armor (embrace the breeze)", weight: 40 },
 ];
 

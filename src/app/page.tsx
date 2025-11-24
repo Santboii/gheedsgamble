@@ -283,7 +283,7 @@ export default function Home() {
               onSpinComplete={handleSpinComplete}
             />
           ) : (
-            <div className={styles.pendingResult}>
+            <div className={styles.pendingResult} role="status" aria-live="polite" aria-atomic="true">
               <h3>FATE HAS CHOSEN:</h3>
               <div className={styles.resultValue}>{pendingResult}</div>
 
