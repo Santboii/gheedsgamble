@@ -81,6 +81,16 @@
   z-index: 100;
 }
 
+.fatePrefix {
+  color: #FF4500;
+  text-shadow:
+    0 0 10px #FFD700,
+    0 0 20px #8B0000,
+    0 0 30px #000;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
 .configContainer {
   background: rgba(0, 0, 0, 0.8);
   padding: 2rem;

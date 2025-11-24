@@ -215,8 +215,8 @@ export default function Home() {
       {step === "CONFIG" && (
         <section className={styles.configContainer} aria-labelledby="config-heading">
           <div className={styles.configHeader}>
-            <img src="/gheed.png" alt="Gheed the merchant" className={styles.gheedIcon} />
             <h2 id="config-heading">MAKE YOUR WAGER</h2>
+            <img src="/gheed.png" alt="Gheed the merchant" className={styles.gheedIcon} />
           </div>
           <div className={styles.configGroup}>
             <label htmlFor="rerolls-input">Rerolls Allowed:</label>
@@ -269,9 +269,9 @@ export default function Home() {
       {(step === "CLASS" || step === "BUILD" || step === "CHALLENGE") && (
         <div className={styles.stepContainer}>
           <h2>
-            {step === "CLASS" && "FATE: CHOOSE YOUR CLASS"}
-            {step === "BUILD" && `FATE: CHOOSE YOUR BUILD (${selections.className})`}
-            {step === "CHALLENGE" && `FATE: CHOOSE CHALLENGE ${selections.challenges.length + 1}/${config.challengeCount}`}
+            {step === "CLASS" && <><span className={styles.fatePrefix}>FATE:</span> CHOOSE YOUR CLASS</>}
+            {step === "BUILD" && <><span className={styles.fatePrefix}>FATE:</span> CHOOSE YOUR BUILD ({selections.className})</>}
+            {step === "CHALLENGE" && <><span className={styles.fatePrefix}>FATE:</span> CHOOSE CHALLENGE {selections.challenges.length + 1}/{config.challengeCount}</>}
           </h2>
 
           {!pendingResult ? (
