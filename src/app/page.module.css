@@ -153,8 +153,38 @@
 
 .startButton {
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   width: 100%;
+  background: linear-gradient(to bottom, #ff4500, #8b0000);
+  border: 2px solid #ffd700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+  animation: pulseButton 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.startButton:hover {
+  background: linear-gradient(to bottom, #ff6347, #a50000);
+  box-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
+  transform: scale(1.02);
+  border-color: #fff;
+}
+
+@keyframes pulseButton {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+  }
 }
 
 .stepContainer {
