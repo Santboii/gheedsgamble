@@ -22,11 +22,17 @@ const Wheel: React.FC<WheelProps> = ({ items, winningIndex, onSpinComplete }) =>
 
     if (!items || items.length === 0) return null;
 
+    // Truncate text to max 12 characters for wheel display
+    const truncateText = (text: string, maxLength: number = 12): string => {
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength) + '...';
+    };
+
     // Convert items to the format expected by react-custom-roulette
     const data = items.map((item) => ({
-        option: item,
+        option: truncateText(item),
         style: {
-            backgroundColor: '#2a0000',
+            backgroundColor: '#8B0000',
             textColor: '#FFFFFF'
         }
     }));

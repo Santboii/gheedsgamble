@@ -85,10 +85,11 @@
 
 .segmentText {
     color: #FFFFFF;
-    font-weight: 900;
+    font-weight: 400;
     text-transform: uppercase;
     text-shadow:
-        0 0 8px #000,
+        0 0 3px black,
+        0 0 5px black,
         2px 2px 0 #000,
         -2px -2px 0 #000,
         2px -2px 0 #000,
