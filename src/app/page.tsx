@@ -280,7 +280,7 @@ export default function Home() {
               items={
                 step === "CLASS" ? CLASSES :
                   (step === "BUILD" && selections.className) ? BUILDS[selections.className].map(b => b.name) :
-                    CHALLENGES.map(c => c.text)
+                    CHALLENGES.filter(c => !selections.challenges.find(sc => sc.id === c.id)).map(c => c.text)
               }
               winningIndex={step === "CHALLENGE" ? targetChallengeIndex : undefined}
               onSpinComplete={handleSpinComplete}
