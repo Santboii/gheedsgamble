@@ -405,31 +405,29 @@
 
 /* Run Tracking Styles */
 .historyButton {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   background: transparent;
-  border: none;
+  border: 2px solid rgba(199, 179, 119, 0.5);
   color: rgba(199, 179, 119, 0.8);
-  padding: 0;
-  font-size: 0.9rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s;
-  text-decoration: none;
-  outline: none;
 }
 
-.historyButton:hover,
-.historyButton:focus {
+.historyButton:hover {
+  background: rgba(199, 179, 119, 0.1);
+  border-color: var(--diablo-gold);
   color: var(--diablo-gold);
-  text-decoration: underline;
-  outline: none;
+  transform: scale(1.02);
 }
 
 .startRunButton {
   background: linear-gradient(135deg, #8B4513, #654321);
   border: 2px solid var(--diablo-gold);
   color: var(--diablo-gold);
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s;
   margin-right: 1rem;
@@ -793,10 +791,11 @@
   }
 
   .resultCard {
-    padding: 1.5rem;
+    padding: 1rem;
     max-width: 400px;
-    width: calc(100% - 2rem);
-    margin: 0 auto;
+    width: 95%;
+    margin: 2rem auto 0;
+    box-sizing: border-box;
   }
 
   .resultTitle {

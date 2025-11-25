@@ -369,7 +369,7 @@ export default function Home() {
               onClick={reset}
               aria-label="Reset and create a new randomized run"
             >
-              NEW RUN
+              COWER AWAY
             </button>
           </div>
         </div>
