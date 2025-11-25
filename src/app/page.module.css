@@ -405,21 +405,23 @@
 
 /* Run Tracking Styles */
 .historyButton {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background: transparent;
-  border: 2px solid rgba(199, 179, 119, 0.5);
+  border: none;
   color: rgba(199, 179, 119, 0.8);
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
+  padding: 0;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s;
+  text-decoration: none;
+  outline: none;
 }
 
-.historyButton:hover {
-  background: rgba(199, 179, 119, 0.1);
-  border-color: var(--diablo-gold);
+.historyButton:hover,
+.historyButton:focus {
   color: var(--diablo-gold);
-  transform: scale(1.02);
+  text-decoration: underline;
+  outline: none;
 }
 
 .startRunButton {
