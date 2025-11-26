@@ -1,6 +1,6 @@
 # 🎲 Gheed's Gamble
 
-> *"Good day to you partner!"* - Gheed
+> *"Good day to you partner!"*
 
 Welcome to **Gheed's Gamble** - the ultimate Diablo 2: Resurrected hardcore randomizer! Spin the wheel of fate and let RNG decide your class, build, and challenges. Will you survive Sanctuary, or will you become another soul for the Burning Hells?
 
