@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Opportunity Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Reddit Opportunity Finder</h1>
+            <div class="user-info">
+                <span class="badge">v1.0</span>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.total_posts_processed }}</div>
+                <div class="stat-label">Posts Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.responses_today }}</div>
+                <div class="stat-label">Responses Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.most_active_subreddit.subreddit if stats.most_active_subreddit else 'N/A' }}</div>
+                <div class="stat-label">Top Subreddit</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <a href="/?status=new" class="filter-btn {{ 'active' if current_status == 'new' else '' }}">New Opportunities</a>
+            <a href="/?status=replied" class="filter-btn {{ 'active' if current_status == 'replied' else '' }}">Replied</a>
+            <a href="/?status=skipped" class="filter-btn {{ 'active' if current_status == 'skipped' else '' }}">Skipped</a>
+        </div>
+
+        <div class="opportunities-grid">
+            {% if opportunities %}
+                {% for opp in opportunities %}
+                <div class="opportunity-card" id="card-{{ opp.post_id }}">
+                    <div class="opportunity-header">
+                        <span class="subreddit-tag">r/{{ opp.subreddit }}</span>
+                        <span class="post-meta">{{ opp.created_at | timeago }} • u/{{ opp.author }}</span>
+                    </div>
+                    
+                    <a href="{{ opp.url }}" target="_blank" class="post-title">{{ opp.title }}</a>
+                    
+                    <div class="analysis-badges">
+                        <span class="badge">Confidence: {{ "%.0f"|format(opp.analysis.confidence * 100) }}%</span>
+                        <span class="badge">Level: {{ opp.analysis.experience_level }}</span>
+                        <span class="badge">Budget: {{ opp.analysis.budget_range }}</span>
+                    </div>
+
+                    <div class="suggested-response">
+                        <button class="copy-btn" onclick="copyResponse('{{ opp.post_id }}')">Copy</button>
+                        <div id="response-{{ opp.post_id }}">{{ opp.suggested_response }}</div>
+                    </div>
+
+                    <div class="actions">
+                        <a href="{{ opp.url }}" target="_blank" class="action-btn btn-secondary" style="text-align: center; text-decoration: none;">View on Reddit</a>
+                        
+                        {% if current_status == 'new' %}
+                            <button onclick="updateStatus('{{ opp.post_id }}', 'skipped')" class="action-btn btn-danger">Skip</button>
+                            <button onclick="updateStatus('{{ opp.post_id }}', 'replied')" class="action-btn btn-success">Mark Replied</button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <h3>No opportunities found</h3>
+                    <p>Check back later or adjust your filters.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        async function updateStatus(postId, status) {
+            try {
+                const response = await fetch(`/api/opportunity/${postId}/status`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: status }),
+                });
+                
+                if (response.ok) {
+                    // Remove card from view with animation
+                    const card = document.getElementById(`card-${postId}`);
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.remove();
+                        // Reload if empty to show empty state
+                        if (document.querySelectorAll('.opportunity-card').length === 0) {
+                            window.location.reload();
+                        }
+                    }, 300);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to update status');
+            }
+        }
+
+        function copyResponse(postId) {
+            const text = document.getElementById(`response-${postId}`).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector(`#card-${postId} .copy-btn`);
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

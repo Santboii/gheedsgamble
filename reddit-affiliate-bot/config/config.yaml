@@ -1,0 +1,46 @@
+bot:
+  # How often to check for new posts (in minutes)
+  check_interval_minutes: 60
+  
+  # Maximum posts to process per subreddit per run
+  max_posts_per_run: 10
+  
+  # Response style: "helpful", "detailed", or "concise"
+  response_style: "helpful"
+  
+  # Minimum confidence score to respond (0.0 - 1.0)
+  confidence_threshold: 0.7
+
+filters:
+  # Minimum age of post before responding (in minutes)
+  # This helps avoid responding too quickly and looking like a bot
+  min_post_age_minutes: 5
+  
+  # Maximum age of post to consider (in hours)
+  max_post_age_hours: 24
+  
+  # Ignore deleted or removed posts
+  ignore_deleted: true
+
+safety:
+  # Only respond to posts that explicitly ask questions
+  require_question_keywords: true
+  
+  # Add random delays to avoid spam detection
+  avoid_spam_detection: true
+  
+  # Maximum responses per hour across all subreddits
+  max_responses_per_hour: 4
+  
+  # Minimum time between responses (in minutes)
+  min_time_between_responses: 10
+
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: INFO
+  
+  # Save logs to file
+  save_to_file: true
+  
+  # Log file path
+  log_file: "bot.log"
