@@ -10,57 +10,80 @@ export interface Run {
     notes?: string;
 }
 
-const STORAGE_KEY = 'gheed_gamble_runs';
-
-// Get all runs from localStorage
-export const getRuns = (): Run[] => {
-    if (typeof window === 'undefined') return [];
+// Get all runs from API
+export const getRuns = async (): Promise<Run[]> => {
     try {
-        const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
+        const response = await fetch('/api/runs');
+        if (!response.ok) {
+            if (response.status === 401) {
+                // User not authenticated, return empty array
+                return [];
+            }
+            throw new Error('Failed to fetch runs');
+        }
+        return await response.json();
     } catch (error) {
-        console.error('Error reading runs from localStorage:', error);
+        console.error('Error reading runs from API:', error);
         return [];
     }
 };
 
 // Save a new run
-export const saveRun = (run: Omit<Run, 'id' | 'timestamp'>): Run => {
-    const newRun: Run = {
-        ...run,
-        id: `run_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        timestamp: Date.now()
-    };
+export const saveRun = async (run: Omit<Run, 'id' | 'timestamp'>): Promise<Run | null> => {
+    try {
+        const response = await fetch('/api/runs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(run),
+        });
 
-    const runs = getRuns();
-    runs.unshift(newRun); // Add to beginning
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(runs));
-    return newRun;
+        if (!response.ok) {
+            throw new Error('Failed to save run');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error saving run:', error);
+        return null;
+    }
 };
 
 // Update run status
-export const updateRunStatus = (id: string, status: Run['status'], notes?: string): void => {
-    const runs = getRuns();
-    const runIndex = runs.findIndex(r => r.id === id);
-    if (runIndex !== -1) {
-        runs[runIndex].status = status;
-        if (notes !== undefined) {
-            runs[runIndex].notes = notes;
-        }
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(runs));
+export const updateRunStatus = async (id: string, status: Run['status'], notes?: string): Promise<boolean> => {
+    try {
+        const response = await fetch(`/api/runs/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status, notes }),
+        });
+
+        return response.ok;
+    } catch (error) {
+        console.error('Error updating run status:', error);
+        return false;
     }
 };
 
 // Delete a run
-export const deleteRun = (id: string): void => {
-    const runs = getRuns();
-    const filtered = runs.filter(r => r.id !== id);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+export const deleteRun = async (id: string): Promise<boolean> => {
+    try {
+        const response = await fetch(`/api/runs/${id}`, {
+            method: 'DELETE',
+        });
+
+        return response.ok;
+    } catch (error) {
+        console.error('Error deleting run:', error);
+        return false;
+    }
 };
 
 // Export runs as JSON
-export const exportRuns = (): void => {
-    const runs = getRuns();
+export const exportRuns = (runs: Run[]): void => {
     const dataStr = JSON.stringify(runs, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
@@ -71,23 +94,25 @@ export const exportRuns = (): void => {
     URL.revokeObjectURL(url);
 };
 
-// Import runs from JSON
-export const importRuns = (file: File): Promise<void> => {
+// Import runs from JSON (for migration or backup restore)
+export const importRuns = async (file: File): Promise<Run[]> => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             try {
                 const imported = JSON.parse(e.target?.result as string) as Run[];
-                const existing = getRuns();
-                // Merge, avoiding duplicates by ID
-                const merged = [...imported];
-                existing.forEach(run => {
-                    if (!merged.find(r => r.id === run.id)) {
-                        merged.push(run);
+
+                // Import each run via API
+                const importedRuns: Run[] = [];
+                for (const run of imported) {
+                    const { id, timestamp, ...runData } = run;
+                    const newRun = await saveRun(runData);
+                    if (newRun) {
+                        importedRuns.push(newRun);
                     }
-                });
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-                resolve();
+                }
+
+                resolve(importedRuns);
             } catch (error) {
                 reject(error);
             }

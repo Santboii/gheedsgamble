@@ -43,6 +43,15 @@
   z-index: 10;
 }
 
+/* Login Button Container */
+.loginContainer {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+}
+
+
 .description {
   color: #ccc;
   font-style: italic;

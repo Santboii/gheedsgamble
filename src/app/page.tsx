@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Wheel from "@/components/Wheel";
+import LoginButton from "@/components/LoginButton";
 import { CLASSES, BUILDS, CHALLENGES, ClassName, Challenge } from "@/data";
 import { getRuns, saveRun, updateRunStatus, deleteRun, exportRuns, importRuns, Run } from "@/utils/runStorage";
 import styles from "./page.module.css";
@@ -20,6 +22,7 @@ interface SelectionState {
 }
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const [step, setStep] = useState<Step>("CONFIG");
   const [config, setConfig] = useState<Config>({ rerolls: 1, challengeCount: 1 });
   const [selections, setSelections] = useState<SelectionState>({
@@ -38,11 +41,18 @@ export default function Home() {
   const [showHistory, setShowHistory] = useState(false);
   const [runs, setRuns] = useState<Run[]>([]);
   const [currentRunId, setCurrentRunId] = useState<string | null>(null);
+  const [isLoadingRuns, setIsLoadingRuns] = useState(false);
 
-  // Load runs on mount
+  // Load runs on mount and when session changes
   useEffect(() => {
-    setRuns(getRuns());
-  }, []);
+    const loadRuns = async () => {
+      setIsLoadingRuns(true);
+      const fetchedRuns = await getRuns();
+      setRuns(fetchedRuns);
+      setIsLoadingRuns(false);
+    };
+    loadRuns();
+  }, [session]);
 
   const startFlow = () => {
     setRerollsLeft(config.rerolls);
@@ -146,38 +156,52 @@ export default function Home() {
   };
 
   // Run tracking handlers
-  const handleStartRun = () => {
+  const handleStartRun = async () => {
     if (!selections.className || !selections.build) return;
 
-    const run = saveRun({
+    const run = await saveRun({
       className: selections.className,
       build: selections.build,
       challenges: selections.challenges,
       status: 'active'
     });
-    setCurrentRunId(run.id);
-    setRuns(getRuns());
+
+    if (run) {
+      setCurrentRunId(run.id);
+      const fetchedRuns = await getRuns();
+      setRuns(fetchedRuns);
+    } else {
+      alert('Please sign in to save your run!');
+    }
   };
 
-  const handleUpdateStatus = (id: string, status: Run['status']) => {
-    updateRunStatus(id, status);
-    setRuns(getRuns());
+  const handleUpdateStatus = async (id: string, status: Run['status']) => {
+    await updateRunStatus(id, status);
+    const fetchedRuns = await getRuns();
+    setRuns(fetchedRuns);
   };
 
-  const handleDeleteRun = (id: string) => {
-    deleteRun(id);
-    setRuns(getRuns());
+  const handleDeleteRun = async (id: string) => {
+    await deleteRun(id);
+    const fetchedRuns = await getRuns();
+    setRuns(fetchedRuns);
   };
 
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleExport = () => {
+    exportRuns(runs);
+  };
+
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      importRuns(file).then(() => {
-        setRuns(getRuns());
-        alert('Runs imported successfully!');
-      }).catch(() => {
+      try {
+        const importedRuns = await importRuns(file);
+        const fetchedRuns = await getRuns();
+        setRuns(fetchedRuns);
+        alert(`Successfully imported ${importedRuns.length} runs!`);
+      } catch (error) {
         alert('Error importing runs');
-      });
+      }
     }
   };
 
@@ -191,6 +215,11 @@ export default function Home() {
       <div className={styles.backgroundLayer} />
       <div className={styles.fireOverlayBack} />
       <div className={styles.fireOverlay} />
+
+      {/* Login Button */}
+      <div className={styles.loginContainer}>
+        <LoginButton />
+      </div>
       {/* Visual Effects */}
       <div className="blood-splatter" style={{ top: '10%', left: '5%', width: '300px', height: '300px' }} />
       <div className="blood-splatter" style={{ bottom: '15%', right: '10%', width: '400px', height: '400px', animationDelay: '1s' }} />
@@ -397,7 +426,7 @@ export default function Home() {
             </div>
             <div className={styles.modalActions}>
               <button
-                onClick={exportRuns}
+                onClick={handleExport}
                 className={styles.exportButton}
                 aria-label="Export your run history as a JSON file"
               >
